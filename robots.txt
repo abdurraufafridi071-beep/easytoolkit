@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://abdurraufafridi071-beep.github.io/easytoolkit/sitemap.xml
