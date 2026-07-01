@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Word to PDF - EasyToolkit</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#f4f7fb;
+padding:20px;
+}
+
+.container{
+max-width:500px;
+margin:auto;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+h1{
+text-align:center;
+}
+
+input,button{
+width:100%;
+padding:15px;
+margin-top:15px;
+font-size:16px;
+border-radius:10px;
+}
+
+button{
+background:#2563eb;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+button:hover{
+background:#1d4ed8;
+}
+
+#status{
+margin-top:20px;
+font-size:18px;
+text-align:center;
+font-weight:bold;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<h1>📄 Word to PDF</h1>
+
+<input type="file" id="wordFile" accept=".doc,.docx">
+
+<button id="convertBtn">
+Convert to PDF
+</button>
+
+<p id="status"></p>
+
+</div>
+
+</div>
+
+<script>
+
+document.getElementById("convertBtn").onclick=function(){
+
+const file=document.getElementById("wordFile").files[0];
+
+if(!file){
+alert("Please select a Word file.");
+return;
+}
+
+document.getElementById("status").innerHTML="⏳ Converting...";
+
+setTimeout(function(){
+
+document.getElementById("status").innerHTML="✅ Word file selected successfully.<br><br>Real PDF conversion will be added in the next step.";
+
+},1500);
+
+}
+
+</script>
+
+</body>
+  <a href="index.html" style="
+display:inline-block;
+margin-bottom:20px;
+text-decoration:none;
+background:#2563eb;
+color:white;
+padding:10px 15px;
+border-radius:8px;
+font-weight:bold;">
+← Home
+  </a>
+</html>

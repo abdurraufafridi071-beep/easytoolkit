@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Resizer - EasyToolkit</title>
+<style>
+body{font-family:Arial;background:#f4f7fb;padding:20px}
+.card{background:#fff;padding:20px;border-radius:12px;max-width:500px;margin:auto;box-shadow:0 5px 15px rgba(0,0,0,.1)}
+input,button{width:100%;padding:12px;margin-top:12px}
+img{max-width:100%;margin-top:15px;border-radius:10px}
+</style>
+</head>
+<body>
+
+<div class="card">
+<h2>🖼️ Image Resizer</h2>
+
+<input type="file" id="image" accept="image/*">
+
+<input type="number" id="width" placeholder="Width (px)">
+<input type="number" id="height" placeholder="Height (px)">
+
+<button onclick="resizeImage()">Resize & Download</button>
+
+<img id="preview">
+
+</div>
+
+<script>
+const preview=document.getElementById("preview");
+
+function resizeImage(){
+
+const file=document.getElementById("image").files[0];
+
+if(!file){
+alert("Select an image");
+return;
+}
+
+const w=parseInt(document.getElementById("width").value);
+const h=parseInt(document.getElementById("height").value);
+
+const img=new Image();
+
+img.onload=function(){
+
+const canvas=document.createElement("canvas");
+
+canvas.width=w;
+canvas.height=h;
+
+const ctx=canvas.getContext("2d");
+
+ctx.drawImage(img,0,0,w,h);
+
+preview.src=canvas.toDataURL("image/jpeg");
+
+const a=document.createElement("a");
+a.href=preview.src;
+a.download="resized-image.jpg";
+a.click();
+
+}
+
+img.src=URL.createObjectURL(file);
+
+}
+</script>
+
+</body>
+  <a href="index.html" style="
+display:inline-block;
+margin-bottom:20px;
+text-decoration:none;
+background:#2563eb;
+color:white;
+padding:10px 15px;
+border-radius:8px;
+font-weight:bold;">
+← Home
+  </a>
+</html>

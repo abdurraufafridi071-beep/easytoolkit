@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Word Counter</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#f4f7fb;
+padding:20px;
+}
+
+.container{
+max-width:600px;
+margin:auto;
+}
+
+textarea{
+width:100%;
+height:200px;
+padding:15px;
+font-size:18px;
+border-radius:10px;
+}
+
+.result{
+background:white;
+padding:15px;
+margin-top:20px;
+border-radius:10px;
+font-size:20px;
+}
+</style>
+
+</head>
+  <a href="index.html" style="
+display:inline-block;
+margin-bottom:20px;
+text-decoration:none;
+background:#2563eb;
+color:white;
+padding:10px 15px;
+border-radius:8px;
+font-weight:bold;">
+← Home
+  </a>
+<body>
+
+<div class="container">
+
+<h1>📝 Word Counter</h1>
+
+<textarea id="text" placeholder="Type here..."></textarea>
+
+<div class="result">
+Words:
+<span id="words">0</span>
+
+<br><br>
+
+Characters:
+<span id="chars">0</span>
+</div>
+
+</div>
+
+<script>
+
+const text=document.getElementById("text");
+
+text.addEventListener("input",()=>{
+
+let value=text.value.trim();
+
+document.getElementById("chars").innerText=text.value.length;
+
+if(value===""){
+document.getElementById("words").innerText=0;
+}
+else{
+document.getElementById("words").innerText=value.split(/\s+/).length;
+}
+
+});
+
+</script>
+
+</body>
+</html>
