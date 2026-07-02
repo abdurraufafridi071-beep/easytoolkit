@@ -5,35 +5,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Word to PDF - EasyToolkit</title>
 
+<script src="https://unpkg.com/mammoth/mammoth.browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
 <style>
 body{
 font-family:Arial,sans-serif;
 background:#f4f7fb;
 padding:20px;
+text-align:center;
 }
 
 .container{
-max-width:500px;
+max-width:700px;
 margin:auto;
-}
-
-.card{
-background:white;
+background:#fff;
 padding:20px;
-border-radius:15px;
+border-radius:12px;
 box-shadow:0 5px 15px rgba(0,0,0,.1);
-}
-
-h1{
-text-align:center;
 }
 
 input,button{
 width:100%;
-padding:15px;
-margin-top:15px;
+padding:14px;
+margin-top:12px;
 font-size:16px;
-border-radius:10px;
+border-radius:8px;
+box-sizing:border-box;
 }
 
 button{
@@ -43,15 +41,23 @@ border:none;
 cursor:pointer;
 }
 
-button:hover{
-background:#1d4ed8;
+#preview{
+margin-top:20px;
+padding:15px;
+border:1px solid #ddd;
+text-align:left;
+min-height:120px;
+overflow:auto;
 }
 
-#status{
+.home{
+display:inline-block;
 margin-top:20px;
-font-size:18px;
-text-align:center;
-font-weight:bold;
+text-decoration:none;
+background:#2563eb;
+color:#fff;
+padding:10px 15px;
+border-radius:8px;
 }
 </style>
 
@@ -60,55 +66,44 @@ font-weight:bold;
 
 <div class="container">
 
-<div class="card">
+<h2>📄 Word to PDF</h2>
 
-<h1>📄 Word to PDF</h1>
+<input type="file" id="wordFile" accept=".docx">
 
-<input type="file" id="wordFile" accept=".doc,.docx">
+<button onclick="convertToPDF()">Convert to PDF</button>
 
-<button id="convertBtn">
-Convert to PDF
-</button>
-
-<p id="status"></p>
-
+<div id="preview">
+Your document preview will appear here...
 </div>
 
 </div>
+
+<a href="index.html" class="home">← Home</a>
 
 <script>
 
-document.getElementById("convertBtn").onclick=function(){
+async function convertToPDF(){
 
 const file=document.getElementById("wordFile").files[0];
 
 if(!file){
-alert("Please select a Word file.");
+alert("Please select a .docx file.");
 return;
 }
 
-document.getElementById("status").innerHTML="⏳ Converting...";
+const arrayBuffer=await file.arrayBuffer();
 
-setTimeout(function(){
+const result=await mammoth.convertToHtml({arrayBuffer:arrayBuffer});
 
-document.getElementById("status").innerHTML="✅ Word file selected successfully.<br><br>Real PDF conversion will be added in the next step.";
+document.getElementById("preview").innerHTML=result.value;
 
-},1500);
+const element=document.getElementById("preview");
+
+html2pdf().from(element).save("document.pdf");
 
 }
 
 </script>
 
 </body>
-  <a href="index.html" style="
-display:inline-block;
-margin-bottom:20px;
-text-decoration:none;
-background:#2563eb;
-color:white;
-padding:10px 15px;
-border-radius:8px;
-font-weight:bold;">
-← Home
-  </a>
 </html>
