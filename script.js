@@ -29,3 +29,17 @@ if (searchInput) {
     });
   });
 }
+const themeBtn = document.getElementById("themeBtn");
+
+if(themeBtn){
+themeBtn.onclick = function(){
+
+document.body.classList.toggle("dark-mode");
+
+themeBtn.innerText =
+document.body.classList.contains("dark-mode")
+? "☀️ Light Mode"
+: "🌙 Dark Mode";
+
+};
+}
