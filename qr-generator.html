@@ -48,7 +48,15 @@ Generate QR
 </button>
 
 <div id="qrcode"></div>
+<br>
 
+<button id="downloadBtn" style="display:none;">
+⬇ Download QR Code
+</button>
+
+<button onclick="clearQR()">
+🗑 Clear
+</button>
 <script>
 
 function generateQR(){
@@ -62,7 +70,39 @@ height:250
 });
 
 }
+  setTimeout(function(){
 
+const img=document.querySelector("#qrcode img");
+
+if(img){
+
+const download=document.getElementById("downloadBtn");
+
+download.style.display="block";
+
+download.onclick=function(){
+
+const a=document.createElement("a");
+
+a.href=img.src;
+
+a.download="qr-code.png";
+
+a.click();
+}
+}
+
+}
+
+},300);
+
+}
+function clearQR(){
+    document.getElementById("text").value="";
+    document.getElementById("qrcode").innerHTML="";
+    document.getElementById("downloadBtn").style.display="none";
+  }
+  } 
 </script>
 
 </body>
