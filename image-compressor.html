@@ -67,88 +67,45 @@ display:none;
 </div>
 
 <script>
-
 const image = document.getElementById("image");
-const preview = document.getElementById("preview");
-let selectedFile;
+const compressBtn = document.getElementById("compressBtn");
 
-image.addEventListener("change", function(){
+compressBtn.onclick = function () {
 
-selectedFile = this.files[0];
+    const file = image.files[0];
 
-if(selectedFile){
-preview.src = URL.createObjectURL(selectedFile);
-preview.style.display = "block";
-}
+    if (!file) {
+        alert("Please select an image first.");
+        return;
+    }
 
-});
+    const img = new Image();
 
-document.getElementById("compressBtn").onclick = function(){
+    img.onload = function () {
 
-if(!selectedFile){
-alert("Please select an image.");
-return;
-}
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
 
-const canvas = document.createElement("canvas");
-const ctx = canvas.getContext("2d");
+        canvas.width = img.width;
+        canvas.height = img.height;
 
-const img = new Image();
+        ctx.drawImage(img, 0, 0);
 
-img.onload = function(){
+        canvas.toBlob(function(blob){
 
-canvas.width = img.width;
-canvas.height = img.height;
+            const link = document.createElement("a");
 
-ctx.drawImage(img,0,0);
+            link.href = URL.createObjectURL(blob);
+            link.download = "compressed-image.jpg";
+            link.click();
 
-canvas.toBlob(function(blob){
+        }, "image/jpeg", 0.6);
 
-const link=document.createElement("a");
+    };
 
-link.href=URL.createObjectURL(blob);
+    img.src = URL.createObjectURL(file);
 
-link.download="compressed-image.jpg";
-
-link.click();
-
-},"image/jpeg",0.6);
-
-}
-
-img.src=URL.createObjectURL(selectedFile);
-
-}
-
-
-
-const image=document.getElementById("image");
-const preview=document.getElementById("preview");
-
-image.addEventListener("change",function(){
-
-const file=this.files[0];
-
-if(file){
-
-preview.src=URL.createObjectURL(file);
-
-preview.style.display="block";
-
-}
-
-});
-
-document.getElementById("compressBtn").onclick=function(){
-
-alert("✅ Image selected successfully!\n\nReal compression will be added in the next step.");
-
-}
-
-</...
-const image = document.getElementById("image");
-const preview = document.getElementById("preview");
-// baqi sara JavaScript
+};
 
 </script>
 
