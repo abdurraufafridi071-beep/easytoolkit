@@ -61,40 +61,39 @@ Generate QR
 
 function generateQR(){
 
-document.getElementById("qrcode").innerHTML="";
+    document.getElementById("qrcode").innerHTML="";
 
-new QRCode(document.getElementById("qrcode"),{
-text:document.getElementById("text").value,
-width:250,
-height:250
-});
+    new QRCode(document.getElementById("qrcode"),{
+        text:document.getElementById("text").value,
+        width:250,
+        height:250
+    });
 
-}
-  setTimeout(function(){
+    setTimeout(function(){
 
-const img=document.querySelector("#qrcode img");
+        const img=document.querySelector("#qrcode img");
 
-if(img){
+        if(img){
 
-const download=document.getElementById("downloadBtn");
+            const download=document.getElementById("downloadBtn");
 
-download.style.display="block";
+            download.style.display="block";
 
-download.onclick=function(){
+            download.onclick=function(){
 
-const a=document.createElement("a");
+                const a=document.createElement("a");
 
-a.href=img.src;
+                a.href=img.src;
 
-a.download="qr-code.png";
+                a.download="qr-code.png";
 
-a.click();
-}
-}
+                a.click();
 
-}
+            };
 
-},300);
+        }
+
+    },300);
 
 }
 function clearQR(){
@@ -102,7 +101,6 @@ function clearQR(){
     document.getElementById("qrcode").innerHTML="";
     document.getElementById("downloadBtn").style.display="none";
   }
-  } 
 </script>
 
 </body>
